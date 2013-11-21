@@ -92,8 +92,6 @@ if [ "true" == $KEEP_M2_CACHE ]; then
   done
 fi
 
-: ${CLEARDB_DATABASE_URL:?" Failed to build app, missing environment variable"}
-
 echo "-----> creating openmrs properties file in $BUILD_DIR/.OpenMRS/openmrs-runtime.properties"
 
 DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`
@@ -120,7 +118,8 @@ connection.url=jdbc:mysql://${DB_HOSTNAME}
 application_data_directory=${BUILD_DIR}/package/target/distro
  
 EOF
-echo " done"
+echo " done, the results are:"
+cat $BUILD_DIR/.OpenMRS/openmrs-runtime.properties
 
 PROFILE_PATH="$BUILD_DIR/.profile.d/java.sh"
 mkdir -p $(dirname $PROFILE_PATH)
