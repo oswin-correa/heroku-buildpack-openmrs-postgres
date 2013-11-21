@@ -94,20 +94,22 @@ fi
 
 echo "-----> creating openmrs properties file in $HOME/.OpenMRS/openmrs-runtime.properties"
 
-DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`
-DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/\1/'`
-DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`
-
 mkdir -p $HOME/.OpenMRS
-cat > $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
+cat > $HOME/.OpenMRS/openmrs-runtime.properties <<'EOF'
 #
 # OpenMRS Runtime Properties file
 #
+
+DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`
+DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/\1/'`
+DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`
  
 ### Database connection properties
 connection.username=$DB_USERNAME
 connection.password=$DB_PASSWORD
 connection.url=jdbc:mysql://${DB_HOSTNAME}
+EOF
+cat > $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
  
 ### Other
 ## Set the directory that OpenMRS uses for its application data
