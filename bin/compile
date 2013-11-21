@@ -92,7 +92,7 @@ if [ "true" == $KEEP_M2_CACHE ]; then
   done
 fi
 
-: ${CLEARDB_DATABASE_URL:?"Failed to build app: cannot find cleardb credentials in CLEARDB_DATABASE_URL"}
+: ${CLEARDB_DATABASE_URL:?" Failed to build app, missing environment variable"}
 
 echo "-----> creating openmrs properties file in $BUILD_DIR/.OpenMRS/openmrs-runtime.properties"
 
