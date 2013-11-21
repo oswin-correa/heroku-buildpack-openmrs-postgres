@@ -12,5 +12,5 @@ config_vars:
 addons:
   - cleardb:punch
 default_process_types:
-  web:      java \$JAVA_OPTS -jar package/target/dependency/webapp-runner.jar --port \$PORT --path zitulele --expand-war package/target/distro/*.war
+  web:      java \$JAVA_OPTS -jar package/target/dependency/webapp-runner.jar --port \$PORT --path openmrs --expand-war package/target/distro/*.war
 EOF

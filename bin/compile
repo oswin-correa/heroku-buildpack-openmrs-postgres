@@ -92,28 +92,14 @@ if [ "true" == $KEEP_M2_CACHE ]; then
   done
 fi
 
-echo "-----> creating openmrs properties file in $BUILD_DIR/.OpenMRS/openmrs-runtime.properties"
-echo "-----> APPDIR"
-echo $APPDIR
-
-if [ -d ${BUILD_DIR}/package/target ]; then
-  echo "build dir"
-fi
-
-if [ -d /app/package/target ]; then
-  echo "app package dir"
-fi
-
-if [ -d /app/target ]; then
-  echo "app target dir"
-fi
+echo "-----> creating openmrs properties file in $HOME/.OpenMRS/openmrs-runtime.properties"
 
 DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`
 DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/\1/'`
 DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`
 
-mkdir -p $BUILD_DIR/.OpenMRS
-cat > $BUILD_DIR/.OpenMRS/openmrs-runtime.properties <<EOF
+mkdir -p $HOME/.OpenMRS
+cat > $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
 #
 # OpenMRS Runtime Properties file
 #
@@ -129,11 +115,11 @@ connection.url=jdbc:mysql://${DB_HOSTNAME}
 ## Defaults to C:/Docs&Settings/username/Application Data/OpenMRS for windows
 ## Defaults to ~/.OpenMRS for *nix
 ## (As of build 1.2.0.3426)
-application_data_directory=${BUILD_DIR}/package/target/distro
+application_data_directory=${HOME}/package/target/distro
  
 EOF
 echo " done, the results are:"
-cat $BUILD_DIR/.OpenMRS/openmrs-runtime.properties
+cat $HOME/.OpenMRS/openmrs-runtime.properties
 
 PROFILE_PATH="$BUILD_DIR/.profile.d/java.sh"
 mkdir -p $(dirname $PROFILE_PATH)
