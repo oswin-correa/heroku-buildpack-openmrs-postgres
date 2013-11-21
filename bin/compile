@@ -94,8 +94,8 @@ fi
 
 echo "-----> creating openmrs properties file in $HOME/.OpenMRS/openmrs-runtime.properties"
 
-mkdir -p $HOME/.OpenMRS
-cat > $HOME/.OpenMRS/openmrs-runtime.properties <<'EOF'
+mkdir -p ${BUILD_DIR}/.OpenMRS
+cat > ${BUILD_DIR}/.OpenMRS/openmrs-runtime.properties <<'EOF'
 #
 # OpenMRS Runtime Properties file
 #
@@ -109,7 +109,7 @@ connection.username=$DB_USERNAME
 connection.password=$DB_PASSWORD
 connection.url=jdbc:mysql://${DB_HOSTNAME}
 EOF
-cat >> $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
+cat >> ${BUILD_DIR}/.OpenMRS/openmrs-runtime.properties <<EOF
  
 ### Other
 ## Set the directory that OpenMRS uses for its application data
@@ -121,7 +121,7 @@ application_data_directory=${HOME}/package/target/distro
  
 EOF
 echo " done, the results are:"
-cat $HOME/.OpenMRS/openmrs-runtime.properties
+cat ${BUILD_DIR}/.OpenMRS/openmrs-runtime.properties
 
 PROFILE_PATH="$BUILD_DIR/.profile.d/java.sh"
 mkdir -p $(dirname $PROFILE_PATH)
