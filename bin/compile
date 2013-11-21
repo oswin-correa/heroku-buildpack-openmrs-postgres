@@ -107,7 +107,7 @@ DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`
 ### Database connection properties
 connection.username=$DB_USERNAME
 connection.password=$DB_PASSWORD
-connection.url=jdbc:mysql://${DB_HOSTNAME}
+connection.url=jdbc:mysql://$DB_HOSTNAME
 EOF
 cat >> ${BUILD_DIR}/.OpenMRS/openmrs-runtime.properties <<EOF
  
