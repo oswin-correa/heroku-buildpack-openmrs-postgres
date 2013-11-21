@@ -99,15 +99,11 @@ cat > ${BUILD_DIR}/.OpenMRS/openmrs-runtime.properties <<'EOF'
 #
 # OpenMRS Runtime Properties file
 #
-
-DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`
-DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/\1/'`
-DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`
  
 ### Database connection properties
-connection.username=$DB_USERNAME
-connection.password=$DB_PASSWORD
-connection.url=jdbc:mysql://$DB_HOSTNAME
+connection.username=${env.DB_USERNAME}
+connection.password=${env.DB_PASSWORD}
+connection.url=jdbc:mysql://${env.DB_HOSTNAME}
 EOF
 cat >> ${BUILD_DIR}/.OpenMRS/openmrs-runtime.properties <<EOF
  
@@ -127,5 +123,8 @@ PROFILE_PATH="$BUILD_DIR/.profile.d/java.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 echo 'export PATH="/app/.jdk/bin:$PATH"' >> $PROFILE_PATH
 echo 'export JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -Djava.rmi.server.useCodebaseOnly=true"' >> $PROFILE_PATH
+echo "export DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`" >> $PROFILE_PATH
+echo "export DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/\1/'`" >> $PROFILE_PATH
+echo "export DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`" >> $PROFILE_PATH
 
 logger -p user.notice -t "slugc[$$]" "language_pack_java java_compile_end $LOGGER_FLAGS"
