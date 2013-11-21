@@ -109,7 +109,7 @@ connection.username=$DB_USERNAME
 connection.password=$DB_PASSWORD
 connection.url=jdbc:mysql://${DB_HOSTNAME}
 EOF
-cat > $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
+cat >> $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
  
 ### Other
 ## Set the directory that OpenMRS uses for its application data
