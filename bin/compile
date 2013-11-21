@@ -93,6 +93,20 @@ if [ "true" == $KEEP_M2_CACHE ]; then
 fi
 
 echo "-----> creating openmrs properties file in $BUILD_DIR/.OpenMRS/openmrs-runtime.properties"
+echo "-----> APPDIR"
+echo $APPDIR
+
+if [ -d ${BUILD_DIR}/package/target ]; then
+  echo "build dir"
+fi
+
+if [ -d /app/package/target ]; then
+  echo "app package dir"
+fi
+
+if [ -d /app/target ]; then
+  echo "app target dir"
+fi
 
 DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`
 DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/\1/'`
