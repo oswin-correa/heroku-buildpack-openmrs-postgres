@@ -2,6 +2,8 @@
 
 . ${BUILDPACK_TEST_RUNNER_HOME}/lib/test_utils.sh
 
+echo ${BUILDPACK_TEST_RUNNER_HOME}
+
 testRelease()
 {
   expected_release_output=`cat <<EOF
@@ -11,7 +13,7 @@ config_vars:
   JAVA_OPTS: -Xmx384m -Xss512k -XX:+UseCompressedOops
   MAVEN_OPTS: -Xmx384m -Xss512k -XX:+UseCompressedOops 
 addons:
-  heroku-postgresql:dev
+  cleardb:punch
 EOF`
 
   release  
