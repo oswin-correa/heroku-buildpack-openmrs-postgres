@@ -87,6 +87,7 @@ fi
 
 #copy .m2 and .maven if needed
 if [ "true" == $KEEP_M2_CACHE ]; then
+  echo "-----> keeping m2 cache in `pwd`"
   for DIR in ".m2" ".maven" ; do
     cp -r $CACHE_DIR/$DIR $DIR
   done
