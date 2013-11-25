@@ -61,6 +61,9 @@ echo " done"
 # change to build dir to run maven
 cd $BUILD_DIR
 
+mkdir -p .m2
+cp $CACHE_DIR/.m2/settings.xml .m2/
+
 export MAVEN_OPTS="-Xmx512m"
 
 # build app
@@ -82,7 +85,7 @@ fi
 #copy .m2 and .maven if needed
 if [ "true" == $KEEP_M2_CACHE ]; then
   echo "-----> keeping m2 cache in `pwd`"
-  for DIR in ".maven" ".m2/settings.xml" ; do
+  for DIR in ".maven"; do
     cp -r $CACHE_DIR/$DIR $DIR
   done
 fi
