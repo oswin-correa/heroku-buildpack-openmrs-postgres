@@ -31,4 +31,4 @@ echo "       done"
 
 echo "-----> running database setup"
 
-$HOME/.maven/bin/mvn -B -Duser.home=$HOME -Dmaven.repo.local=$HOME/.m2/repository -s $HOME/.m2/settings.xml -Psetupdatabase generate-resources -Ddb.url=$DB_URL -Ddb.user=$DB_USERNAME -Ddb.password=$DB_PASSWORD
+$HOME/.maven/bin/mvn -B -Duser.home=$HOME -s $HOME/.m2/settings.xml -Psetupdatabase generate-resources -Ddb.url=$DB_URL -Ddb.user=$DB_USERNAME -Ddb.password=$DB_PASSWORD
