@@ -7,8 +7,8 @@ DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/
 DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`
 DB_URL=jdbc:mysql://${DB_HOSTNAME}
 
-mkdir -p $BUILD_DIR/.OpenMRS
-cat > $BUILD_DIR/.OpenMRS/openmrs-runtime.properties <<EOF
+mkdir -p $HOME/.OpenMRS
+cat > $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
 #
 # OpenMRS Runtime Properties file
 #
@@ -31,4 +31,4 @@ echo "       done"
 
 echo "-----> running database setup"
 
-mvn -Psetupdatabase generate-resources -Ddb.url=$DB_URL -Ddb.user=$DB_USERNAME -Ddb.password=$DB_PASSWORD
+$HOME/.maven/bin/mvn -B -Duser.home=$HOME -Dmaven.repo.local=$HOME/.m2/repository -s $HOME/.m2/settings.xml -Psetupdatabase generate-resources -Ddb.url=$DB_URL -Ddb.user=$DB_USERNAME -Ddb.password=$DB_PASSWORD
