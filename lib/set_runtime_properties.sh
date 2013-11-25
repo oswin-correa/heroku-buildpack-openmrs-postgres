@@ -5,6 +5,7 @@ echo "-----> creating openmrs properties file in $HOME/.OpenMRS/openmrs-runtime.
 DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`
 DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/\1/'`
 DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`
+DB_URL=jdbc:mysql://${DB_HOSTNAME}
 
 mkdir -p $BUILD_DIR/.OpenMRS
 cat > $BUILD_DIR/.OpenMRS/openmrs-runtime.properties <<EOF
@@ -15,7 +16,7 @@ cat > $BUILD_DIR/.OpenMRS/openmrs-runtime.properties <<EOF
 ### Database connection properties
 connection.username=$DB_USERNAME
 connection.password=$DB_PASSWORD
-connection.url=jdbc:mysql://${DB_HOSTNAME}
+connection.url=$DB_URL
  
 ### Other
 ## Set the directory that OpenMRS uses for its application data
@@ -27,3 +28,7 @@ application_data_directory=${HOME}/package/target/distro
  
 EOF
 echo "       done"
+
+echo "-----> running database setup"
+
+mvn -Psetupdatabase generate-resources -Ddb.url=$DB_URL -Ddb.user=$DB_USERNAME -Ddb.password=$DB_PASSWORD
