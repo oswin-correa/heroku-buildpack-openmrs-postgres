@@ -17,12 +17,6 @@ curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack
 
 KEEP_M2_CACHE="true"
 
-if [ ! -d $CACHE_DIR ]; then
-  KEEP_M2_CACHE="false"
-elif [ -f $CACHE_DIR/removeM2Cache ]; then
-  KEEP_M2_CACHE="false"
-fi
-
 if [ "true" == $KEEP_M2_CACHE ]; then
   logger -p user.notice -t "slugc[$$]" "language_pack_java retain_m2_repo"
 fi
