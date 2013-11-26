@@ -2,10 +2,10 @@
 
 echo "-----> creating openmrs properties file in $HOME/.OpenMRS/openmrs-runtime.properties"
 
-DB_USERNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/([^:]+):(.*)/\1/'`
-DB_PASSWORD=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^:]+:([^@]+)@.*/\1/'`
-DB_HOSTNAME=`echo ${CLEARDB_DATABASE_URL}| sed -E 's/mysql:\/\/[^@]+@//'`
-DB_URL="jdbc:mysql://${DB_HOSTNAME}&autoReconnect=true&sessionVariables=storage_engine=InnoDB&useUnicode=true&characterEncoding=UTF-8"
+DB_USERNAME=`echo ${DATABASE_URL}| sed -E 's/postgres:\/\/([^:]+):(.*)/\1/'`
+DB_PASSWORD=`echo ${DATABASE_URL}| sed -E 's/postgres:\/\/[^:]+:([^@]+)@.*/\1/'`
+DB_HOSTNAME=`echo ${DATABASE_URL}| sed -E 's/postgres:\/\/[^@]+@//'`
+DB_URL="jdbc:postgresql://${DB_HOSTNAME}&charSet=UTF-8"
 
 mkdir -p $HOME/.OpenMRS
 cat > $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
