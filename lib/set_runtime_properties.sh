@@ -5,7 +5,7 @@ echo "-----> creating openmrs properties file in $HOME/.OpenMRS/openmrs-runtime.
 DB_USERNAME=`echo ${DATABASE_URL}| sed -E 's/postgres:\/\/([^:]+):(.*)/\1/'`
 DB_PASSWORD=`echo ${DATABASE_URL}| sed -E 's/postgres:\/\/[^:]+:([^@]+)@.*/\1/'`
 DB_HOSTNAME=`echo ${DATABASE_URL}| sed -E 's/postgres:\/\/[^@]+@//'`
-DB_URL="jdbc:postgresql://${DB_HOSTNAME}&charSet=UTF-8"
+DB_URL="jdbc:postgresql://${DB_HOSTNAME}?charSet=UTF-8"
 
 mkdir -p $HOME/.OpenMRS
 cat > $HOME/.OpenMRS/openmrs-runtime.properties <<EOF
